@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+div {
+    width: 200px;
+    height: 200px;
+    border: 1px dotted black;
+    background-color: antiquewhite;
+}
+
+.caja {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+.extra {
+    width: 204px;
+}
+
+.relativo {
+    position: relative;
+    right: 20px;
+}

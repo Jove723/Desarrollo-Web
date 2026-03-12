@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Battle — Tu archivo</title>
+  <style>
+    /* ── RESET BÁSICO ── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0d0d0f;
+      color: #f0f0ee;
+      font-family: monospace;
+      padding: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      color: #666;
+      letter-spacing: .1em;
+    }
+
+    .ronda {
+      margin-bottom: 3rem;
+      border: 1px solid #2a2a32;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .ronda-header {
+      background: #16161a;
+      padding: .6rem 1rem;
+      font-size: .75rem;
+      color: #666;
+      letter-spacing: .1em;
+      border-bottom: 1px solid #2a2a32;
+    }
+
+    .ronda-body {
+      padding: 1.5rem;
+    }
+
+    /* ══════════════════════════════════════
+     RONDA 1 — DISPLAY
+     Objetivo: usar display correcto en
+     .bloque, .etiqueta y .cuadro
+  ══════════════════════════════════════ */
+
+    .bloque {
+      display: block;
+      background: #ff6b35;
+      height: 40px;
+      padding: 0 1rem;
+      line-height: 40px;
+      margin-bottom: .5rem;
+      font-size: .75rem;
+    }
+
+    .etiqueta {
+      display: inline;
+      background: #00d4aa;
+      padding: .2rem .6rem;
+      color: #000;
+      font-size: .75rem;
+      border-radius: 3px;
+    }
+
+    .cuadro {
+      display: inline-block;
+      width: 80px;
+      height: 40px;
+      background: #a855f7;
+      font-size: .65rem;
+      color: white;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 4px;
+    }
+
+    .parrafote {
+      color: #666;
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    .contenedorsote {
+      margin: 15px 0px 15px 0px;
+    }
+
+    .contenedorsito {
+      margin: 10px 0px 10px 0px;
+    }
+
+
+    /* ══════════════════════════════════════
+     RONDA 2 — FLUJO
+     Objetivo: los bloques empujan hacia
+     abajo. Los inline no lo hacen.
+  ══════════════════════════════════════ */
+
+    .r2-bloque-a {
+      display: block;
+      background: #ff6b35;
+      opacity: .8;
+      height: 50px;
+      padding: 0 1rem;
+      line-height: 50px;
+      font-size: .75rem;
+      border-radius: 5px;
+    }
+
+    .r2-bloque-b {
+      display: block;
+      background: #00d4aa;
+      opacity: .8;
+      height: 50px;
+      padding: 0 1rem;
+      line-height: 50px;
+      font-size: .75rem;
+      color: #000;
+      border-radius: 5px;
+    }
+
+    .r2-inline-item {
+      /* TODO: ¿qué display hace que estos
+       queden en la misma línea? */
+      display: inline;
+      background: rgba(168, 85, 247, .6);
+      padding: .2rem .5rem;
+      font-size: .75rem;
+      color: white;
+      border-radius: 3px;
+      margin-right: .3rem;
+    }
+
+
+    /* ══════════════════════════════════════
+     RONDA 3 — POSITION
+     Objetivo: posicionar cada caja
+     según indica el objetivo en pantalla
+  ══════════════════════════════════════ */
+
+    .r3-contenedor {
+      /* TODO: necesita un position para que
+       .r3-absolute se posicione acá adentro */
+      position: relative;
+      height: 180px;
+      background: rgba(255, 255, 255, .03);
+      border-radius: 4px;
+    }
+
+    .r3-static {
+      /* position: static es el valor por defecto
+       No hace falta declararlo, pero entendelo */
+      position: static;
+      background: #ff6b35;
+      opacity: .8;
+      width: 120px;
+      height: 36px;
+      border-radius: 4px;
+      padding: 0 .8rem 0 .8rem;
+      line-height: 36px;
+      font-size: .7rem;
+    }
+
+    .r3-relative {
+      /* TODO: position + top + left */
+      position: relative;
+      top: 10px;
+      left: 20px;
+      background: #00d4aa;
+      opacity: .85;
+      width: 120px;
+      height: 36px;
+      border-radius: 4px;
+      padding: 0 .8rem;
+      line-height: 36px;
+      font-size: .7rem;
+      color: #000;
+    }
+
+    .r3-absolute {
+      /* TODO: position + top + right */
+      display: inline;
+      top: 10px;
+      right: 10px;
+      position: absolute;
+      background: #a855f7;
+      opacity: .9;
+      width: 94px;
+      border-radius: 4px;
+      font-size: .7rem;
+      padding: 4px 0px 4px 0px;
+      color: white;
+    }
+
+    .r3-fixed {
+      position: fixed;
+      bottom: 0px;
+      left: 45%;
+      background-color: rgba(139, 0, 0, 0.34);
+      border: 1px solid rgb(255, 64, 0);
+      border-radius: 5px;
+    }
+
+
+    /* ══════════════════════════════════════
+     RONDA 4 — BATALLA FINAL (2 puntos)
+     Construir la card de personaje
+     completa desde cero
+  ══════════════════════════════════════ */
+
+    .card {
+      /* TODO: position para que badge,
+       avatar, nombre y barra funcionen */
+      width: 280px;
+      height: 180px;
+      background: linear-gradient(135deg, #1a1a2e, #0a0a14);
+      border: 1px solid #2a2a40;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .card .badge {
+      /* TODO: position absolute + top + right */
+      background: #ff6b35;
+      color: white;
+      font-size: .7rem;
+      padding: .2rem .6rem;
+      border-radius: 4px;
+    }
+
+    .card .avatar {
+      /* TODO: position absolute + top + left */
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 107, 53, .2);
+      border: 2px solid #ff6b35;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      text-align: center;
+      line-height: 60px;
+    }
+
+    .card .nombre {
+      /* TODO: position absolute + bottom + left */
+      font-size: 1.4rem;
+      letter-spacing: .08em;
+      color: white;
+    }
+
+    .card .barra-inferior {
+      /* TODO: position absolute + bottom:0 + left:0 + right:0 */
+      height: 32px;
+      background: rgba(0, 212, 170, .12);
+      border-top: 1px solid #00d4aa;
+      color: #00d4aa;
+      font-size: .75rem;
+      padding: 0 .8rem;
+      line-height: 32px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>// CSS BATTLE — TU ARCHIVO · Mirá el proyector para el objetivo</h1>
+
+  <!-- ══ RONDA 1 ══ -->
+  <div class="ronda">
+    <div class="ronda-header">RONDA 1 — DISPLAY</div>
+    <div class="ronda-body">
+
+      <!-- block -->
+      <div class="bloque">display: block → ocupa toda la línea</div>
+
+      <div class="contenedorsote">
+        <p class="parrafote">display: inline → ocupa solo el espacio que necesita</p>
+      </div>
+
+      <div class="contenedorsote">
+        <span class="etiqueta">hola</span>
+        <span class="etiqueta">mundo</span>
+        <span class="etiqueta">juntos</span>
+      </div>
+
+      <div class="contenedorsote">
+        <p class="parrafote">display: inline-block → en línea pero con dimensiones</p>
+      </div>
+
+      <div class="contenedorsote">
+        <span class="cuadro">80×40</span>
+        <span class="cuadro" style="background-color: #a955f78f;">80×40</span>
+        <span class="cuadro" style="background-color: #fd51188f;">80×40</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ RONDA 2 ══ -->
+  <div class="ronda">
+    <div class="ronda-header">RONDA 2 — FLUJO DEL DOCUMENTO</div>
+    <div class="ronda-body">
+
+      <div class="r2-bloque-a contenedorsito">Bloque A — empuja hacia abajo</div>
+      <div class="r2-bloque-b contenedorsito">Bloque B — está debajo en el flujo</div>
+
+      <div class="contenedorsote">
+        <span class="r2-inline-item">inline A</span>
+        <span class="r2-inline-item">inline B</span>
+        <span class="r2-inline-item">inline C</span>
+        <p style="display: inline;" class="parrafote">← no empujan verticalmente</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ RONDA 3 ══ -->
+  <div class="ronda">
+    <div class="ronda-header">RONDA 3 — POSITION</div>
+    <div class="ronda-body">
+
+      <div class="r3-contenedor">
+        <div class="r3-static">static</div>
+        <div class="r3-relative">relative +10/+20</div>
+        <div class="r3-absolute">absolute top:10 right:10</div>
+        <div style="position: relative;">
+          <div class="r3-fixed">fixed (nav / HUD)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ RONDA 4 ══ -->
+  <div class="ronda">
+    <div class="ronda-header">RONDA 4 — BATALLA FINAL (2 puntos)</div>
+    <div class="ronda-body">
+
+      <div class="card">
+        <div class="badge">NIVEL 5</div>
+        <div class="avatar">⚔️</div>
+        <h2 class="nombre">GUERRERO</h2>
+        <div class="barra-inferior">HP: 150 / 150</div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

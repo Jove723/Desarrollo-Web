@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+.padre {
+    width: 100%;
+    height: 1080px;
+    display: flex;
+}
+
+.container {
+    background-color: bisque;
+    border: 3px solid darkred;
+    width: 100%;
+    height: 550px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 0px;
+    column-gap: 15px;
+    justify-content: space-around;
+}
+
+div {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: gainsboro;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
