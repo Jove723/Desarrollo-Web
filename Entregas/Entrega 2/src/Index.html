@@ -7,18 +7,27 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="bg-image"></div>
   <main class="portafolio">
-    <!-- About Section -->
-    <section class="about">
-      <header class="header">
+    <header class="header" id="header">
         <div class="status">
           <span class="status-dot"></span>
           <span class="status-text">Disponible</span>
         </div>
-        <button class="btn">Contáctame</button>
-      </header>
-
-      <section class="hero" id="hero">
+        <div class="header-right">
+          <img src="assets/icons/brightness-high.svg" alt="Light Mode" class="theme-toggle" id="theme-toggle">
+          <select name="language-selector" id="language" class="lang-selector">
+            <option value="es" class="lang-item">&#127466;&#127480;</option>
+            <option value="en" class="lang-item">&#127988;󠁧󠁢󠁥󠁮󠁧󠁿</option>
+            <option value="pt" class="lang-item">&#127477;&#127481;</option>
+          </select>
+          <button class="btn">Contáctame</button>
+        </div>
+        
+    </header>
+    <!-- About Section -->
+    <section class="about" id="about">
+      <section class="hero">
         <h1 class="role">DISEÑADOR UI/UX</h1>
         <h2 class="name">Jorge Vergara</h2>
 
@@ -155,24 +164,55 @@
           <img class="tools-item" src="assets/Images/Unity_Logo 1.png" alt="">
         </div>
 
-        <div class="section">
+        <div class="language-list">
           <h2 class="section-title">Idiomas</h2>
           <div class="language">
               <p>Español</p>
               <div class="language-bar-bg">
-                  <div class="language-bar" style="width: 100%;"></div>
+                  <div class="language-bar es"></div>
               </div>
           </div>
           <div class="language">
               <p>Inglés</p>
               <div class="language-bar-bg">
-                  <div class="language-bar" style="width: 70%;"></div>
+                  <div class="language-bar en"></div>
               </div>
           </div>
         </div>
 
      </section>
 
+     <!-- Contact Section -->
+      <section class="section" id="contact">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-info-footer">
+          <div class="contact-item">
+            <img src="assets/icons/Mail.svg" alt="" class="contact-icon">
+            <p>jvmarquez723@gmail.com</p>
+          </div>
+
+          <div class="contact-item">
+            <img src="assets/icons/Phone.svg" alt="" class="contact-icon">
+            <p>+57 301 406-6140</p>
+          </div>
+
+          <div class="contact-item">
+            <img src="assets/icons/Location.svg" alt="" class="contact-icon">
+            <p>Envigado, Colombia</p>
+          </div>
+        </div>
+      </section>
+
+      <nav class="navbar">
+        <div class="navbar-wrapper">
+          <a class="navbar-item" href="#about">Inicio</a>
+          <a class="navbar-item" href="#summary">Resumen</a>
+          <a class="navbar-item" href="#work">Experiencia</a>
+          <a class="navbar-item" href="#skills">Habilidades</a>
+          <a class="navbar-item" href="#contact">Contacto</a>
+        </div>
+      </nav>
   </main>
 </body>
+<script src="script.js"></script>
 </html>
