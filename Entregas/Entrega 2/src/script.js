@@ -5,81 +5,53 @@ const bgImage = document.querySelector('.bg-image');
 
 const CLEAR_BLUR_SECTIONS = new Set(['about', 'contact']);
 
-let isManualNavigating = false;
-let scrollTimeout;
-
 const indicator = document.createElement('div');
 indicator.className = 'navbar-indicator';
 navbarWrapper.appendChild(indicator);
 
-function detectSection() {
-    let activeSection = null;
+let isClicking = false;
 
-    sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const midpoint = window.innerHeight / 2;
-        const inViewport = rect.top < midpoint && rect.bottom > midpoint;
-
-        if (inViewport) {
-            activeSection = section.id;
-        }
-    });
-
-    const shouldBlur = activeSection !== 'about' && activeSection !== 'contact';
-    return { activeSection, shouldBlur };
+function moveIndicator(item) {
+    indicator.style.left = item.offsetLeft + 'px';
+    indicator.style.width = item.offsetWidth + 'px';
+    navItems.forEach(i => i.classList.remove('navbar-item-selected'));
+    item.classList.add('navbar-item-selected');
 }
 
-function updateUI(activeItem) {
-    if (!activeItem) return;
-
-    const left = activeItem.offsetLeft;
-    const width = activeItem.offsetWidth;
-    indicator.style.left = left + 'px';
-    indicator.style.width = width + 'px';
-
-    navItems.forEach(item => {
-        item.classList.toggle('navbar-item-selected', item === activeItem);
-    });
-}
-
-function updateBlur(shouldBlur) {
-    if (shouldBlur) {
-        bgImage.classList.add('bg-blurred');
-    } else {
+function updateBlur(sectionId) {
+    if (CLEAR_BLUR_SECTIONS.has(sectionId)) {
         bgImage.classList.remove('bg-blurred');
+    } else {
+        bgImage.classList.add('bg-blurred');
     }
 }
 
-function onScroll() {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-        if (isManualNavigating) return;
-
-        const { activeSection, shouldBlur } = detectSection();
-
-        if (activeSection) {
-            const activeItem = document.querySelector(`[href="#${activeSection}"]`);
-            updateUI(activeItem);
+const observer = new IntersectionObserver((entries) => {
+    if (isClicking) return;
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        const activeItem = document.querySelector(`.navbar-item[href="#${id}"]`);
+        if (activeItem) {
+            moveIndicator(activeItem);
+            updateBlur(id);
         }
+    });
+}, { rootMargin: '-70% 0px -30% 0px' });
 
-        updateBlur(shouldBlur);
-    }, 16);
-}
+sections.forEach(section => observer.observe(section));
 
 navItems.forEach(item => {
     item.addEventListener('click', () => {
-        isManualNavigating = true;
-        updateUI(item);
+        isClicking = true;
+        moveIndicator(item);
+        const id = item.getAttribute('href').slice(1);
+        updateBlur(id);
+        setTimeout(() => { isClicking = false; }, 800)
     });
 });
 
-window.addEventListener('scroll', onScroll);
-
 window.addEventListener('load', () => {
-    const initialSection = document.querySelector('section:target') || sections[0];
-    const initialItem = document.querySelector(`[href="#${initialSection.id}"]`);
-    updateUI(initialItem);
-
-    const { shouldBlur } = detectSection();
-    updateBlur(shouldBlur);
+    const firstItem = document.querySelector('.navbar-item[href="#about"]');
+    if (firstItem) moveIndicator(firstItem);
 });

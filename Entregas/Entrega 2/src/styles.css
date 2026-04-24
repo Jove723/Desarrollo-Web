@@ -2,17 +2,11 @@
 :root {
   /* Colors - Light Mode */
   --color-primary: #264027;
-  --color-primary-hover: #3C5233;
-  --color-secondary: #55251d;
-  --color-secondary-hover: #745343;
   --color-background: #dce0d9;
-  --color-surface: #f0f2ee;
-  --color-surface-raised: #ffffff;
   --color-text: #000000;
-  --color-text-secondary: #264027;
-  --color-text-muted: #6b6b6b;
-  --color-text-inverse: #ffffff;
-  --color-border: #c4c8c1;
+  --color-text-nav: #000;
+  --color-button:#dce0d9;
+  --color-button-bg:#264027;
 
   /* Typography */
   @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
@@ -56,6 +50,20 @@
   --transition-normal: 250ms ease-out;
 }
 
+/* Colors - Dark Mode */
+.darkmode {
+  --color-primary: #617561;
+  --color-text: #dce0d9;
+  --color-button:#264027;
+  --color-button-bg:#dce0d9;  
+}
+
+/* Icon colors */
+.icon {
+  color: var(--color-icon);
+  transition: color 0.25s ease-out;
+}
+
 /* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -73,6 +81,10 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+.darkmode .bg-image {
+  background-image: url(assets/Images/Background_Dark.png);
 }
 
 .bg-image {
@@ -108,6 +120,7 @@ a {
 .about {
   min-height: 95vh;
   max-width: 162rem;
+  scroll-margin-top: 4rem;
 }
 
 /* Header */
@@ -150,6 +163,7 @@ a {
   border: none;
   padding: 0;
   font-size: var(--font-size-xl);
+  color: var(--color-text);
 }
 
 .lang-item {
@@ -158,8 +172,28 @@ a {
 
 /* Theme Toggle */
 .theme-toggle {
-  height: 2.5rem;
+  height: 2rem;
+  width: 2rem;
+  fill: currentColor;
+  border: none;
+  background-color: #ffffff00;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  color: var(--color-text);
 }
+
+.light-icon, .dark-icon { display: none;}
+
+body:not(.darkmode) .light-icon { display: block;}
+
+body.darkmode .dark-icon { display: block;}
+
+body:not(.darkmode) .theme-toggle:hover .light-icon { display: none;}
+body:not(.darkmode) .theme-toggle:hover .dark-icon { display: block;}
+
+body.darkmode .theme-toggle:hover .dark-icon { display: none;}
+body.darkmode .theme-toggle:hover .light-icon { display: block;}
+
 
 /* Button */
 .btn {
@@ -167,16 +201,17 @@ a {
   font-size: var(--font-size-md);
   font-weight: 600;
   font-family: var(--font-family);
-  color: var(--color-text-inverse);
-  background-color: var(--color-primary);
+  color: var(--color-button);
+  background-color: var(--color-button-bg);
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  transition: background-color var(--transition-normal);
 }
 
 .btn:hover {
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-background);
+  color: var(--color-primary);
 }
 
 /* Section Prefab */
@@ -186,6 +221,7 @@ a {
   flex-direction: column;
   gap: var(--space-30);
   margin-bottom: var(--space-100);
+  scroll-margin-top: 4rem;
 }
 
 /* Hero Section */
@@ -196,7 +232,7 @@ a {
 .role {
   font-size: var(--font-size-xl);
   font-weight: 700;
-  color: var(--color-text-secondary);
+  color: var(--color-primary);
 }
 
 .name {
@@ -228,7 +264,7 @@ a {
   align-items: center;
   gap: var(--space-15);
   font-size: var(--font-size-md);
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   font-weight: 600;
 }
 
@@ -236,6 +272,7 @@ a {
   width: 3rem;
   height: 3rem;
   flex-shrink: 0;
+  color: var(--color-primary);
 }
 
 .contact-text {
@@ -256,7 +293,7 @@ a {
 .section-title {
   font-size: var(--font-size-3xl);
   font-weight: 700;
-  color: var(--color-text-secondary);
+  color: var(--color-primary);
 }
 
 .summary-text {
@@ -296,7 +333,7 @@ a {
 .work-role {
   font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--color-text-secondary);
+  color: var(--color-primary);
 }
 
 .work-description {
@@ -311,7 +348,7 @@ a {
 .work-projects-title {
   font-size: var(--font-size-lg);
   font-weight: 700;
-  color: var(--color-text-secondary);
+  color: var(--color-primary);
   margin-top: var(--space-20);
   margin-bottom: var(--space-20);
 }
@@ -371,7 +408,7 @@ a {
 .project-title {
   font-size: var(--font-size-md);
   font-weight: 600;
-  color: var(--color-text-inverse);
+  color: var(--color-text-dark);
 }
 
 .project-desc {
@@ -433,7 +470,6 @@ a {
 .language-bar {
   background-color: var(--color-background);
   border-radius: 20px;
-  border: 2px solid var(--color-primary);
   height: 100%;
   margin: 0;
 }
@@ -467,11 +503,12 @@ a {
 }
 
 .language-bar-bg {
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-primary-dark);
   border-radius: 20px;
   width: 300px;
   height: 12px;
   margin: 0;
+  border: 2px solid var(--color-primary);
 }
 
 /* Responsive - Desktop */
@@ -480,12 +517,11 @@ a {
     bottom: var(--space-20);
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--color-surface);
+    background-color: var(--color-background);
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     gap: var(--space-5);
-    padding: var(--space-5);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     z-index: 1000;
 }
@@ -500,20 +536,16 @@ a {
 .navbar-item {
     font-size: var(--font-size-md);
     font-weight: 600;
-    color: var(--color-text);
-    padding: var(--space-15) var(--space-30);
+    color: var(--color-text-nav);
+    padding: var(--space-10) var(--space-30);
     border-radius: var(--radius-full);
     transition: color var(--transition-fast);
     position: relative;
     z-index: 1;
 }
 
-.navbar-item:hover {
-    background-color: var(--color-border);
-}
-
 .navbar-item-selected {
-    color: var(--color-text-inverse);
+    color: var(--color-background);
     pointer-events: none;
 }
 
@@ -523,7 +555,6 @@ a {
     background-color: var(--color-primary);
     border-radius: var(--radius-full);
     transition: left var(--transition-normal), width var(--transition-normal);
-    bottom: var(--space-5);
     pointer-events: none;
     width: 0;
     left: 0;
