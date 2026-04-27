@@ -83,7 +83,7 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  background-color: var(--color-primary);
+  background-color: #264027;
 }
 
 .darkmode .bg-image {

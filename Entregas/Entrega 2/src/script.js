@@ -1,4 +1,4 @@
-const sections = document.querySelectorAll('section[id]');
+const sections = document.querySelectorAll('section[id], footer[id]');
 const navItems = document.querySelectorAll('.navbar-item');
 const navbarWrapper = document.querySelector('.navbar-wrapper');
 const bgImage = document.querySelector('.bg-image');
@@ -47,8 +47,8 @@ function updateBlur(id) {
 }
 
 const options = window.innerWidth <= 780 
-    ? { rootMargin: '-50% 0px -10% 0px' } 
-    : { rootMargin: '-80% 0px -20% 0px' };
+    ? { rootMargin: '-90% 0px -10% 0px' } 
+    : { rootMargin: '-90% 0px -10% 0px' };
 
 const observer = new IntersectionObserver((entries) => {
     if (isClicking) return;
