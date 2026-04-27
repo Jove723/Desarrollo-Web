@@ -103,7 +103,7 @@ body {
 }
 
 .bg-blurred {
-  filter: blur(1rem);
+  filter: blur(2rem);
 }
 
 a {
@@ -342,21 +342,26 @@ body.darkmode .theme-toggle:hover .light-icon { display: block;}
   width: fit-content;
 }
 
-.contact-info-footer {
+footer .contact-info {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-15);
+  gap: var(--space-30);
   width: fit-content;
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: var(--space-15);
+  gap: var(--space-20);
   font-size: var(--font-size-md);
   color: var(--color-text);
   font-weight: 600;
   width: fit-content;
+}
+
+.contact-item:hover {
+  text-decoration: underline;
+  color: var(--color-primary);
 }
 
 .contact-icon {
