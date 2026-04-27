@@ -32,15 +32,19 @@ function getNestedValue(obj, path) {
 
 async function setLanguage(lang) {
     if (!SUPPORTED_LANGUAGES.includes(lang)) return;
-    
     localStorage.setItem(STORAGE_KEY, lang);
     await loadTranslations(lang);
     applyTranslations();
-    
-    const languageSelector = document.getElementById('language');
-    if (languageSelector) {
-        languageSelector.value = lang;
-    }
+    updateDropdownUI(lang);
+}
+
+function updateDropdownUI(lang) {
+    const option = document.querySelector(`.lang-option[data-value="${lang}"]`);
+    if (!option) return;
+    const flag = option.querySelector('.flag-icon').src;
+    const label = option.querySelector('span').textContent;
+    document.querySelector('#lang-btn .flag-icon').src = flag;
+    document.querySelector('#lang-btn .lang-label').textContent = label;
 }
 
 function getSavedLanguage() {
@@ -53,12 +57,26 @@ async function initI18n() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const languageSelector = document.getElementById('language');
-    if (languageSelector) {
-        languageSelector.addEventListener('change', (e) => {
-            setLanguage(e.target.value);
+    const langBtn = document.getElementById('lang-btn');
+    const langDropdown = document.querySelector('.lang-dropdown');
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    langBtn.addEventListener('click', () => {
+        langDropdown.classList.toggle('open');
+    });
+
+    langOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            langDropdown.classList.remove('open');
+            setLanguage(option.dataset.value);
         });
-    }
-    
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!langDropdown.contains(e.target)) {
+            langDropdown.classList.remove('open');
+        }
+    });
+
     initI18n();
 });
